@@ -3,64 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="بورصة AI - المنصة الأولى في مصر لتحليل الأسهم وتتبع السيولة بالذكاء الاصطناعي.">
-    <title>بورصة AI | المنصة المتكاملة للمستثمر الذكي</title>
+    <meta name="description" content="Boursa AI - النظام الأذكى في الشرق الأوسط لتحليل البورصة المصرية. اكتشف قوة الذكاء الاصطناعي في تتبع السيولة.">
+    <title>Boursa AI | The Future of EGX Trading</title>
     
-    <!-- Fonts: Cairo for Headlines, Tajawal for Body, IBM Plex Sans Arabic for Data -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&family=Tajawal:wght@200;300;400;500;700;800;900&family=Outfit:wght@100;300;400;700&display=swap" rel="stylesheet">
     
     <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Tailwind Config -->
+    <!-- Config -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        dark: '#0B1120',       
-                        darker: '#020617',     
-                        surface: '#1E293B',    
-                        primary: '#3B82F6',    
-                        primaryDark: '#1d4ed8',
-                        accent: '#10B981',     
-                        danger: '#EF4444',     
-                        gold: '#F59E0B',       
-                        goldLight: '#fbbf24',
-                        purple: '#8B5CF6',
-                        chartUp: '#22c55e',
-                        chartDown: '#ef4444'
+                        dark: '#030712',       // Rich Black
+                        void: '#000000',       // Pure Black
+                        surface: '#0f172a',    // Slate 900
+                        primary: '#3b82f6',    // Electric Blue
+                        accent: '#10b981',     // Neon Green
+                        gold: '#fbbf24',       // Luxury Gold
+                        purple: '#8b5cf6',     // Cyber Purple
+                        danger: '#f43f5e',     // Rose Red
                     },
                     fontFamily: {
                         sans: ['Tajawal', 'sans-serif'],
                         display: ['Cairo', 'sans-serif'],
-                        data: ['IBM Plex Sans Arabic', 'sans-serif'],
+                        eng: ['Outfit', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'grid-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+                        'cyber-grid': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+                        'noise': "url('https://www.transparenttextures.com/patterns/stardust.png')",
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'tech-lines': "url('https://www.transparenttextures.com/patterns/diagmonds-light.png')",
                     },
                     animation: {
-                        'ticker': 'ticker 30s linear infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s infinite',
+                        'scan': 'scan 4s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
-                        ticker: {
-                            '0%': { transform: 'translateX(100%)' },
-                            '100%': { transform: 'translateX(-100%)' },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
                         },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px #3B82F6' },
-                            '100%': { boxShadow: '0 0 20px #3B82F6, 0 0 10px #10B981' },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '50%': { opacity: 0.8, boxShadow: '0 0 40px rgba(59, 130, 246, 0.8)' },
+                        },
+                        scan: {
+                            '0%': { backgroundPosition: '0% 0%' },
+                            '100%': { backgroundPosition: '0% 100%' },
                         }
                     }
                 }
@@ -69,804 +68,442 @@
     </script>
 
     <style>
-        /* Base Styles */
+        /* Premium Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #3b82f6, #8b5cf6); border-radius: 10px; }
+
         body {
-            background-color: #020617;
-            color: #e2e8f0;
+            background-color: #030712;
+            color: #fff;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            cursor: default;
         }
 
-        /* Glassmorphism Utilities */
-        .glass {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glass-hover:hover {
-            background: rgba(30, 41, 59, 0.9);
-            border-color: rgba(59, 130, 246, 0.5);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Ticker Animation */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background-color: #0f172a;
-            padding-left: 100%; 
-            box-sizing: content-box;
-            border-bottom: 1px solid #1e293b;
-            height: 40px;
-            display: flex;
-            align-items: center;
-        }
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            box-sizing: content-box;
-            animation-name: ticker;
-            animation-duration: 40s; 
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-        .ticker__item {
-            display: inline-block;
-            padding: 0 2rem;
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            font-weight: 600;
-        }
-
-        /* Gradient Text */
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-gradient-blue {
-            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-        /* Chart Container */
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-
-        /* Nav Link Active State */
-        .nav-link.active {
-            color: #3B82F6;
-            position: relative;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #3B82F6;
-            box-shadow: 0 0 10px #3B82F6;
+        /* Glassmorphism Pro */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         
-        /* Loading Screen */
-        #loader {
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Text Gradients */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-cyber {
+            background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Neon Glows */
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, #3b82f6, #a855f7, #10b981);
+            filter: blur(15px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* Scanline Effect */
+        .scanline {
             position: fixed;
-            inset: 0;
-            background: #020617;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
             z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease;
+            opacity: 0.2;
         }
     </style>
 </head>
-<body class="antialiased font-sans">
-
-    <!-- Loading Screen -->
-    <div id="loader">
-        <div class="flex flex-col items-center">
-            <i class="fa-solid fa-chart-line text-5xl text-primary animate-bounce mb-4"></i>
-            <h2 class="text-2xl font-display font-bold text-white tracking-wider">BOURSA <span class="text-primary">AI</span></h2>
-            <div class="w-48 h-1 bg-gray-800 rounded-full mt-4 overflow-hidden">
-                <div class="h-full bg-primary animate-[ticker_2s_infinite]"></div>
-            </div>
-            <p class="text-gray-500 text-xs mt-2 font-mono">Loading Market Data V28.0...</p>
-        </div>
-    </div>
-
-    <!-- Live Ticker Strip -->
-    <div class="ticker-wrap fixed top-0 z-50">
-        <div class="ticker text-sm">
-            <span class="ticker__item text-chartUp">EGX30 ▲ 30,540 (+1.2%)</span>
-            <span class="ticker__item text-chartDown">EGX70 ▼ 7,210 (-0.4%)</span>
-            <span class="ticker__item text-chartUp">COMI ▲ 85.50 (+2.1%)</span>
-            <span class="ticker__item text-chartUp">FWRY ▲ 6.45 (+3.2%)</span>
-            <span class="ticker__item text-chartDown">TMGH ▼ 65.20 (-0.8%)</span>
-            <span class="ticker__item text-chartUp">SWDY ▲ 35.40 (+1.5%)</span>
-            <span class="ticker__item text-gold">GOLD ▲ 3,450 EGP</span>
-            <span class="ticker__item text-gray-400">USD/EGP 48.50</span>
-            <span class="ticker__item text-chartUp">ABUK ▲ 55.10 (+4.0%) [سيولة عالية]</span>
-            <span class="ticker__item text-chartUp">EGX30 ▲ 30,540 (+1.2%)</span> <!-- Repeat for loop effect -->
-        </div>
-    </div>
+<body class="antialiased">
+    
+    <!-- Cinematic Overlay -->
+    <div class="scanline"></div>
+    <div class="fixed inset-0 bg-noise opacity-[0.03] pointer-events-none z-0"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 top-10 glass border-b border-white/5 transition-all duration-300" id="navbar">
-        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-                    <div class="relative">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white text-xl shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full border-2 border-darker animate-pulse"></div>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-black text-2xl tracking-tight text-white leading-none">BOURSA <span class="text-primary">AI</span></span>
-                        <span class="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase">Investor Pro V28</span>
-                    </div>
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-panel border-b border-white/5 top-0">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <!-- Brand -->
+            <div class="flex items-center gap-4 group cursor-pointer">
+                <div class="relative w-12 h-12 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-primary/20 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-700"></div>
+                    <div class="absolute inset-0 bg-accent/20 rounded-xl -rotate-12 group-hover:rotate-0 transition-transform duration-700"></div>
+                    <i class="fa-solid fa-brain text-2xl text-white relative z-10"></i>
                 </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden xl:flex items-center gap-10 font-bold text-sm text-gray-300">
-                    <button onclick="showPage('home')" class="nav-link active hover:text-white transition py-2">الرئيسية</button>
-                    <button onclick="showPage('sectors')" class="nav-link hover:text-gold transition py-2 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-xs"></i> خريطة السيولة
-                    </button>
-                    <button onclick="showPage('academy')" class="nav-link hover:text-purple transition py-2 flex items-center gap-2">
-                        <i class="fa-solid fa-graduation-cap text-xs"></i> الأكاديمية
-                    </button>
-                    <button onclick="showPage('calculator')" class="nav-link hover:text-accent transition py-2 flex items-center gap-2">
-                        <i class="fa-solid fa-calculator text-xs"></i> حاسبة المخاطر
-                    </button>
-                    <button onclick="showPage('pricing')" class="nav-link hover:text-white transition py-2">الاشتراكات</button>
+                <div>
+                    <h1 class="font-eng font-bold text-2xl tracking-wider text-white leading-none">BOURSA <span class="text-primary">AI</span></h1>
+                    <span class="text-[10px] text-gray-500 font-eng tracking-[0.3em] uppercase block mt-1">System V28.0</span>
                 </div>
+            </div>
 
-                <!-- Action Buttons -->
-                <div class="flex items-center gap-4">
-                    <div class="hidden md:flex flex-col items-end mr-4">
-                        <span class="text-[10px] text-gray-400">حالة السيرفر</span>
-                        <span class="text-[10px] text-accent font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span> Online (45ms)</span>
-                    </div>
-                    <a href="https://t.me/BOURSAAI" target="_blank" class="group relative px-6 py-2.5 bg-primary overflow-hidden rounded-xl font-bold text-white shadow-lg transition-all hover:scale-105 hover:bg-blue-600 font-display">
-                        <span class="relative flex items-center gap-2">ابدأ مجاناً <i class="fa-brands fa-telegram text-lg"></i></span>
-                    </a>
-                    <!-- Mobile Menu Button -->
-                    <button class="xl:hidden text-white text-2xl" onclick="toggleMobileMenu()">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+            <!-- Links (Visual Only) -->
+            <div class="hidden lg:flex items-center gap-12 font-bold text-sm text-gray-400">
+                <span class="hover:text-white cursor-pointer transition">الرؤية</span>
+                <span class="hover:text-gold cursor-pointer transition">النظام</span>
+                <span class="hover:text-white cursor-pointer transition">الأكاديمية</span>
+                <span class="text-gold flex items-center gap-2 px-4 py-2 bg-gold/5 rounded-full border border-gold/20 animate-pulse">
+                    <i class="fa-solid fa-crown text-xs"></i> VIP ACCESS
+                </span>
+            </div>
+
+            <!-- CTA -->
+            <a href="https://t.me/BOURSAAI" target="_blank" class="group relative px-8 py-3 bg-white text-black font-black rounded-none skew-x-[-10deg] hover:bg-primary hover:text-white transition-all duration-300">
+                <div class="skew-x-[10deg] flex items-center gap-2">
+                    LAUNCH BOT <i class="fa-solid fa-arrow-right-long group-hover:translate-x-1 transition"></i>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden xl:hidden bg-darker border-b border-gray-800 p-4 absolute w-full">
-            <div class="flex flex-col gap-4 text-center">
-                <button onclick="showPage('home'); toggleMobileMenu()" class="text-white py-2 border-b border-gray-800">الرئيسية</button>
-                <button onclick="showPage('sectors'); toggleMobileMenu()" class="text-gold py-2 border-b border-gray-800">خريطة السيولة</button>
-                <button onclick="showPage('academy'); toggleMobileMenu()" class="text-purple py-2 border-b border-gray-800">الأكاديمية</button>
-                <button onclick="showPage('calculator'); toggleMobileMenu()" class="text-accent py-2 border-b border-gray-800">حاسبة المخاطر</button>
-                <button onclick="showPage('pricing'); toggleMobileMenu()" class="text-white py-2">الاشتراكات</button>
-            </div>
+            </a>
         </div>
     </nav>
 
-    <!-- Main Content Area (Dynamic) -->
-    <main id="main-content" class="pt-32 pb-20 min-h-screen relative">
+    <!-- Hero Section: The Statement -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Abstract Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
         
-        <!-- PAGE 1: HOME -->
-        <div id="page-home" class="page-section transition-opacity duration-500">
-            <!-- Hero Header -->
-            <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
-                <div data-aos="fade-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-surface border border-gray-700 shadow-xl">
-                        <span class="flex h-3 w-3 relative">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
-                        </span>
-                        <span class="text-gray-300 font-bold text-xs">تحديثات V28: محرك الـ Sector Rotation يعمل الآن</span>
-                    </div>
-                    
-                    <h1 class="text-5xl lg:text-7xl font-display font-black leading-[1.15] mb-8 text-white">
-                        البورصة مش <span class="text-gradient-blue">حظ</span>،<br>
-                        البورصة <span class="text-gradient-gold">أرقام وسيولة</span>.
-                    </h1>
-                    
-                    <p class="text-gray-400 text-lg leading-relaxed mb-10 font-sans max-w-xl border-r-4 border-primary pr-6">
-                        نظام Boursa AI هو مساعدك الشخصي الذي يراقب 400 سهم في الثانية الواحدة. يكشف لك أين يتجه "الكاش" قبل الجميع، ويحدد لك نقاط الدخول والخروج بدقة جراحية بعيداً عن عواطف الخوف والطمع.
-                    </p>
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-4">
+            <div data-aos="fade-down" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
+                <span class="text-xs font-eng text-gray-300 tracking-widest">SYSTEM ONLINE • CAIRO SERVER</span>
+            </div>
+            
+            <h1 data-aos="fade-up" class="text-6xl md:text-9xl font-display font-black text-white leading-tight mb-8">
+                السيطرة <br>
+                <span class="text-gradient-cyber">المطلقة</span>
+            </h1>
+            
+            <p data-aos="fade-up" data-aos-delay="200" class="text-xl md:text-2xl text-gray-400 font-sans font-light max-w-3xl mx-auto leading-relaxed mb-12">
+                نظام <span class="text-white font-bold">Boursa AI</span> ليس مجرد بوت. إنه عقل إلكتروني يراقب نبض السوق المصري، يحلل نوايا الحيتان، ويمنحك الأفضلية التي لا يملكها غيرك.
+            </p>
 
-                    <div class="flex flex-wrap gap-4">
-                        <button onclick="showPage('pricing')" class="bg-white text-darker px-8 py-4 rounded-xl font-bold hover:bg-gray-200 transition shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-3 font-display text-lg">
-                            <i class="fa-solid fa-rocket text-primary"></i> ابدأ رحلة الأرباح
-                        </button>
-                        <button onclick="showPage('sectors')" class="glass px-8 py-4 rounded-xl font-bold text-white hover:bg-surface border border-white/10 transition flex items-center gap-3 font-display">
-                            <i class="fa-solid fa-chart-simple text-gold"></i> شاهد حركة السوق
-                        </button>
-                    </div>
-
-                    <div class="mt-12 grid grid-cols-3 gap-6 border-t border-gray-800 pt-8">
-                        <div>
-                            <div class="text-3xl font-display font-bold text-white">1,250+</div>
-                            <div class="text-xs text-gray-500 font-bold mt-1">مستثمر نشط</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-display font-bold text-accent">85%</div>
-                            <div class="text-xs text-gray-500 font-bold mt-1">دقة التوصيات (V27)</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-display font-bold text-primary">24/7</div>
-                            <div class="text-xs text-gray-500 font-bold mt-1">مراقبة للسوق</div>
-                        </div>
+            <div data-aos="fade-up" data-aos-delay="400" class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <div class="glass-panel px-8 py-6 rounded-2xl flex items-center gap-4 min-w-[200px] border-l-4 border-gold">
+                    <i class="fa-solid fa-bolt text-gold text-3xl"></i>
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500 font-eng uppercase">SPEED</div>
+                        <div class="text-xl font-bold font-eng">120ms</div>
                     </div>
                 </div>
+                <div class="glass-panel px-8 py-6 rounded-2xl flex items-center gap-4 min-w-[200px] border-l-4 border-primary">
+                    <i class="fa-solid fa-eye text-primary text-3xl"></i>
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500 font-eng uppercase">COVERAGE</div>
+                        <div class="text-xl font-bold font-eng">400 Stocks</div>
+                    </div>
+                </div>
+                <div class="glass-panel px-8 py-6 rounded-2xl flex items-center gap-4 min-w-[200px] border-l-4 border-accent">
+                    <i class="fa-solid fa-brain text-accent text-3xl"></i>
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500 font-eng uppercase">ACCURACY</div>
+                        <div class="text-xl font-bold font-eng">AI-DRIVEN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <!-- Visual: Terminal Simulation -->
-                <div class="relative group" data-aos="fade-right">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-darker rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
-                        <!-- Terminal Header -->
-                        <div class="bg-surface px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[10px] font-eng tracking-widest">SCROLL TO EXPLORE</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- Visual Showcase: The Interface -->
+    <section class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <!-- Visual -->
+                <div data-aos="fade-right" class="relative">
+                    <div class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
+                    <!-- Mockup Container -->
+                    <div class="relative bg-[#0b0f19] border border-white/10 rounded-3xl p-4 shadow-2xl rotate-[-2deg] hover:rotate-0 transition duration-500">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
                             <div class="flex gap-2">
                                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <div class="text-xs text-gray-400 font-mono">analysis_terminal.py - Running</div>
+                            <div class="text-xs font-eng text-gray-500">TELEGRAM INTERFACE • LIVE</div>
                         </div>
-                        <!-- Terminal Body -->
-                        <div class="p-6 font-mono text-xs md:text-sm text-gray-300 space-y-3 h-[450px] overflow-y-auto" id="terminal-content">
-                            <div class="text-green-400">root@boursa-ai:~$ ./start_scan.sh --mode=deep</div>
-                            <div class="text-blue-400">> Initializing Connection to EGX Data Feed... [OK]</div>
-                            <div class="text-blue-400">> Loading Sector Rotation Matrix... [OK]</div>
-                            <br>
-                            <div>----------------------------------------</div>
-                            <div class="text-white font-bold">SCANNING SYMBOL: [COMI] - CIB Bank</div>
-                            <div>Price: 85.50 | SMA50: 82.10 | SMA200: 78.00</div>
-                            <div class="text-gold">> Volume Multiplier: 3.2x (Institutional Buy)</div>
-                            <div class="text-purple-400">> RSI: 62 (Healthy) | MACD: Bullish Crossover</div>
-                            <div class="text-accent font-bold blink">> SIGNAL GENERATED: STRONG BUY</div>
-                            <div>----------------------------------------</div>
-                            <br>
-                            <div class="text-white font-bold">SCANNING SYMBOL: [TMGH] - Talaat Moustafa</div>
-                            <div>Price: 65.20 | SMA50: 66.00</div>
-                            <div class="text-red-400">> WARNING: Price below SMA50. Bearish Trend.</div>
-                            <div class="text-red-400">> SIGNAL: AVOID / SELL RALLIES</div>
-                            <br>
-                            <div class="text-gray-500">Processing next batch (398 symbols remaining)...</div>
+                        <!-- Chat Message Simulation -->
+                        <div class="space-y-4 font-sans">
+                            <!-- Bot Msg -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-[#1e293b] p-5 rounded-2xl rounded-tl-none border border-white/5 w-full relative overflow-hidden group">
+                                    <div class="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-full blur-xl group-hover:bg-accent/10 transition"></div>
+                                    <h4 class="text-primary font-bold mb-1 text-sm">🦅 تحليل سهم فورى (FWRY)</h4>
+                                    <div class="text-2xl font-bold text-white mb-2">6.45 EGP <span class="text-sm text-accent font-normal">+3.2% ▲</span></div>
+                                    
+                                    <div class="grid grid-cols-2 gap-2 mb-3">
+                                        <div class="bg-black/30 p-2 rounded border border-white/5">
+                                            <div class="text-[10px] text-gray-500">السيولة</div>
+                                            <div class="text-gold font-bold text-sm">انفجارية 🔥</div>
+                                        </div>
+                                        <div class="bg-black/30 p-2 rounded border border-white/5">
+                                            <div class="text-[10px] text-gray-500">الإشارة</div>
+                                            <div class="text-accent font-bold text-sm">شراء مؤسسي</div>
+                                        </div>
+                                    </div>
+                                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-accent w-[85%] animate-pulse"></div>
+                                    </div>
+                                    <p class="text-[10px] text-gray-400 mt-2 text-left font-eng">CONFIDENCE SCORE: 85/100</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Features Grid -->
-            <section class="max-w-7xl mx-auto px-4 mb-32">
-                <div class="text-center mb-16">
-                    <span class="text-primary font-bold tracking-wider text-sm uppercase">لماذا نحن؟</span>
-                    <h2 class="text-4xl font-display font-black text-white mt-2">أدوات <span class="text-gradient-gold">المؤسسات المالية</span><br>بين يديك الآن</h2>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-surface transition duration-300 border-t-4 border-primary">
-                        <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-3xl mb-6"><i class="fa-solid fa-microchip"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 font-display">محرك التحليل اللحظي</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            خوارزمية معقدة تفحص 19 مؤشراً فنياً (RSI, MACD, Bollinger, VSA) لكل سهم في أقل من 100 مللي ثانية. لا نترك شيئاً للصدفة.
-                        </p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-surface transition duration-300 border-t-4 border-gold">
-                        <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center text-gold text-3xl mb-6"><i class="fa-solid fa-map-location-dot"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 font-display">خريطة السيولة (V28)</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            ميزة حصرية تتبع حركة "الأموال الذكية". اعرف أي القطاعات (بنوك، عقارات، موارد) يتم تجميعها الآن قبل انطلاق الأسعار.
-                        </p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-surface transition duration-300 border-t-4 border-accent">
-                        <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-3xl mb-6"><i class="fa-solid fa-shield-cat"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 font-display">حماية رأس المال</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            نظام صارم لإدارة المخاطر. نحدد لك "وقف الخسارة" وحجم الصفقة المناسب لمحفظتك لتتجنب الخسائر الكارثية.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- PAGE 2: SECTORS (Visual Data) -->
-        <div id="page-sectors" class="page-section hidden transition-opacity duration-500">
-            <section class="max-w-7xl mx-auto px-4 mb-20">
-                <div class="bg-surface border border-gray-700 rounded-3xl p-8 lg:p-12 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
                     
-                    <div class="flex flex-col md:flex-row justify-between items-end mb-10">
-                        <div>
-                            <span class="text-gold font-bold tracking-widest text-xs uppercase mb-2 block">Sector Rotation Engine V28</span>
-                            <h2 class="text-4xl font-display font-black text-white">خريطة السيولة اللحظية 📊</h2>
-                            <p class="text-gray-400 mt-2 max-w-2xl">
-                                هذا الرسم البياني يوضح حجم "السيولة المرجحة" (Turnover) لكل قطاع اليوم. القطاعات ذات الأعمدة الطويلة والخضراء تشهد عمليات تجميع مؤسسي.
-                            </p>
-                        </div>
-                        <div class="flex gap-2 mt-4 md:mt-0">
-                            <span class="px-3 py-1 bg-chartUp/10 text-chartUp text-xs rounded border border-chartUp/20 font-bold">تجميع (Buy)</span>
-                            <span class="px-3 py-1 bg-chartDown/10 text-chartDown text-xs rounded border border-chartDown/20 font-bold">تصريف (Sell)</span>
-                        </div>
-                    </div>
-
-                    <!-- Chart.js Canvas -->
-                    <div class="chart-container bg-darker/50 rounded-xl p-4 border border-gray-800">
-                        <canvas id="sectorsChart"></canvas>
-                    </div>
-
-                    <!-- Insights Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-                        <div class="bg-darker p-4 rounded-xl border-r-4 border-chartUp">
-                            <h4 class="text-gray-400 text-xs mb-1">القطاع القائد</h4>
-                            <div class="text-white font-bold font-display text-lg">🏦 البنوك</div>
-                            <div class="text-chartUp text-xs font-bold mt-1">+1.2B EGP تدفق</div>
-                        </div>
-                        <div class="bg-darker p-4 rounded-xl border-r-4 border-blue-500">
-                            <h4 class="text-gray-400 text-xs mb-1">الفرصة القادمة</h4>
-                            <div class="text-white font-bold font-display text-lg">🏗️ العقارات</div>
-                            <div class="text-blue-400 text-xs font-bold mt-1">تجميع هادئ</div>
-                        </div>
-                        <div class="bg-darker p-4 rounded-xl border-r-4 border-chartDown">
-                            <h4 class="text-gray-400 text-xs mb-1">الأضعف أداءً</h4>
-                            <div class="text-white font-bold font-display text-lg">🏭 الصناعة</div>
-                            <div class="text-chartDown text-xs font-bold mt-1">خروج سيولة</div>
-                        </div>
-                        <div class="bg-darker p-4 rounded-xl border-r-4 border-gray-500">
-                            <h4 class="text-gray-400 text-xs mb-1">السيولة الكلية</h4>
-                            <div class="text-white font-bold font-display text-lg">3.4 مليار ج.م</div>
-                            <div class="text-gray-400 text-xs font-bold mt-1">متوسط</div>
+                    <!-- Floating Elements -->
+                    <div class="absolute -right-10 top-20 glass-panel p-4 rounded-xl border-l-4 border-gold animate-float shadow-2xl backdrop-blur-md">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-gold/10 p-2 rounded-lg text-gold"><i class="fa-solid fa-bell"></i></div>
+                            <div>
+                                <div class="text-[10px] text-gray-400 font-eng uppercase">Alert</div>
+                                <div class="font-bold text-sm">COMI Hit Target 🎯</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
 
-        <!-- PAGE 3: ACADEMY (Massive Content) -->
-        <div id="page-academy" class="page-section hidden">
-            <section class="max-w-7xl mx-auto px-4 mb-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-display font-black text-white">أكاديمية المستثمر الذكي 🎓</h2>
-                    <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
-                        لأن العلم هو سلاحك الوحيد ضد الخسارة. جمعنا لك خلاصة الخبرة في 30 درس مكثف، مشروحة ببساطة (بالعامية المصرية) عشان تفهم الزتونة.
+                <!-- Text -->
+                <div data-aos="fade-left">
+                    <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-6 leading-tight">
+                        تجربة استخدام <br>
+                        <span class="text-primary">نخبوية (Elite)</span>.
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        وداعاً للشاشات المعقدة والرسوم البيانية المزدحمة. نحن نقدم لك "الزتونة". تقاريرنا مصممة لتعطيك القرار النهائي (شراء/بيع/انتظار) في ثانية واحدة، بتصميم بصري مريح للعين، ودقة معلومات لا تجدها إلا في غرف تداول البنوك.
                     </p>
-                </div>
-
-                <!-- Filters -->
-                <div class="flex flex-wrap justify-center gap-4 mb-12 font-bold text-sm">
-                    <button class="px-6 py-2 rounded-full bg-primary text-white shadow-lg">الكل</button>
-                    <button class="px-6 py-2 rounded-full bg-surface text-gray-400 hover:text-white hover:bg-gray-700 transition">تحليل فني</button>
-                    <button class="px-6 py-2 rounded-full bg-surface text-gray-400 hover:text-white hover:bg-gray-700 transition">إدارة مخاطر</button>
-                    <button class="px-6 py-2 rounded-full bg-surface text-gray-400 hover:text-white hover:bg-gray-700 transition">سيكولوجية</button>
-                </div>
-
-                <!-- Lessons Grid (Generated by JS) -->
-                <div id="lessons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Content will be injected here -->
-                </div>
-            </section>
-        </div>
-
-        <!-- PAGE 4: CALCULATOR -->
-        <div id="page-calculator" class="page-section hidden">
-            <section class="max-w-4xl mx-auto px-4 mb-20">
-                <div class="glass p-8 md:p-12 rounded-3xl border border-accent/20">
-                    <div class="text-center mb-10">
-                        <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center text-accent text-3xl mx-auto mb-4">
-                            <i class="fa-solid fa-calculator"></i>
-                        </div>
-                        <h2 class="text-3xl font-display font-black text-white">حاسبة حجم الصفقة (Position Size)</h2>
-                        <p class="text-gray-400 mt-2">لا تدخل أي صفقة عشوائياً. احسب الكمية المناسبة بناءً على المبلغ الذي تستطيع تحمل خسارته.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Inputs -->
-                        <div class="space-y-6">
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-surface border border-gray-700 flex items-center justify-center text-white shrink-0">01</div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-300 mb-2">رأس المال الكلي (EGP)</label>
-                                <input type="number" id="calc-capital" class="w-full bg-darker border border-gray-700 rounded-xl p-4 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none font-mono" placeholder="100000">
+                                <h4 class="text-white font-bold text-xl mb-1">تحليل "الصندوق الأسود"</h4>
+                                <p class="text-sm text-gray-500">نستخدم خوارزميات مغلقة المصدر لفك شفرة صانع السوق.</p>
                             </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-surface border border-gray-700 flex items-center justify-center text-white shrink-0">02</div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-300 mb-2">نسبة المخاطرة (%)</label>
-                                <input type="number" id="calc-risk" class="w-full bg-darker border border-gray-700 rounded-xl p-4 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none font-mono" placeholder="2" value="2">
-                                <p class="text-xs text-gray-500 mt-1">ينصح بـ 1% إلى 2% للمبتدئين.</p>
+                                <h4 class="text-white font-bold text-xl mb-1">السرعة الخارقة</h4>
+                                <p class="text-sm text-gray-500">اتصال مباشر (Direct Socket) مع سيرفرات البورصة بدون تأخير.</p>
                             </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-bold text-gray-300 mb-2">سعر الدخول</label>
-                                    <input type="number" id="calc-entry" class="w-full bg-darker border border-gray-700 rounded-xl p-4 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none font-mono" placeholder="50.00">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-bold text-gray-300 mb-2">سعر الوقف</label>
-                                    <input type="number" id="calc-stop" class="w-full bg-darker border border-gray-700 rounded-xl p-4 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none font-mono" placeholder="48.00">
-                                </div>
-                            </div>
-                            <button onclick="calculateRisk()" class="w-full bg-accent hover:bg-green-600 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-green-500/20">
-                                احسب الآن
-                            </button>
-                        </div>
-
-                        <!-- Results -->
-                        <div class="bg-darker rounded-2xl p-6 border border-gray-800 flex flex-col justify-center relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50"></div>
-                            
-                            <div class="mb-6 text-center border-b border-gray-800 pb-6">
-                                <span class="text-gray-500 text-xs uppercase tracking-widest">عدد الأسهم للشراء</span>
-                                <div class="text-4xl font-mono font-bold text-white mt-2" id="res-shares">0</div>
-                                <span class="text-xs text-gray-400">سهم</span>
-                            </div>
-
-                            <div class="space-y-4">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-400 text-sm">قيمة الصفقة الإجمالية:</span>
-                                    <span class="font-mono text-white font-bold" id="res-position">0 EGP</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-400 text-sm">مبلغ المخاطرة (الخسارة):</span>
-                                    <span class="font-mono text-danger font-bold" id="res-loss">0 EGP</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-400 text-sm">نسبة الخسارة للسهم:</span>
-                                    <span class="font-mono text-gray-300" id="res-percent">0%</span>
-                                </div>
-                            </div>
-                            
-                            <div id="risk-alert" class="mt-6 bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400 hidden">
-                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> تنبيه: الوقف بعيد جداً أو المخاطرة عالية!
-                            </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-            </section>
+            </div>
         </div>
+    </section>
 
-        <!-- PAGE 5: PRICING -->
-        <div id="page-pricing" class="page-section hidden">
-            <section class="max-w-7xl mx-auto px-4 mb-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-display font-black text-white">استثمر في أدواتك 💎</h2>
-                    <p class="text-gray-400 mt-4">اختر الخطة المناسبة وابدأ في تحقيق أرباح حقيقية.</p>
+    <!-- Feature Showcase: Sector Rotation (Conceptual) -->
+    <section class="py-32 bg-darker relative overflow-hidden">
+        <div class="absolute inset-0 bg-cyber-grid opacity-5"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-gold font-eng tracking-[0.5em] text-xs uppercase mb-4 block">V28 Exclusive Engine</span>
+                <h2 class="text-4xl md:text-6xl font-display font-black text-white mb-6">
+                    نرى ما لا يراه <span class="text-gradient-gold">الآخرون</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    بينما ينظر الجميع إلى "السعر"، نحن ننظر إلى "تدفق الأموال". محرك Sector Rotation الجديد يكشف لك القطاع الذي يستعد للانفجار قبل أن يتحرك السهم بمليم واحد.
+                </p>
+            </div>
+
+            <!-- Conceptual Visuals (Non-functional, purely aesthetic) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div data-aos="zoom-in" class="glass-card p-10 rounded-3xl text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center mb-8 border border-white/5 group-hover:border-gold/50 transition duration-500 shadow-2xl">
+                        <i class="fa-solid fa-building-columns text-3xl text-gray-400 group-hover:text-gold transition"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2 font-display">البنوك</h3>
+                    <div class="h-1 w-24 mx-auto bg-gray-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gold w-[90%] shadow-[0_0_10px_#fbbf24]"></div>
+                    </div>
+                    <p class="text-[10px] font-eng text-gold mt-2 uppercase tracking-widest">High Inflow</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                    <!-- Free -->
-                    <div class="bg-surface p-8 rounded-3xl border border-gray-700 text-center opacity-75 hover:opacity-100 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">المجانية</h3>
-                        <div class="text-3xl font-bold text-gray-300 font-display mb-6">0 EGP</div>
-                        <ul class="space-y-4 text-sm text-gray-400 mb-8 text-right pr-4">
-                            <li><i class="fa-solid fa-check text-gray-500 ml-2"></i> تحليل 3 أسهم يومياً</li>
-                            <li><i class="fa-solid fa-check text-gray-500 ml-2"></i> أسعار متأخرة 15 دقيقة</li>
-                            <li><i class="fa-solid fa-xmark text-red-500 ml-2"></i> لا يوجد خريطة سيولة</li>
-                            <li><i class="fa-solid fa-xmark text-red-500 ml-2"></i> لا يوجد توصيات VIP</li>
-                        </ul>
-                        <a href="#" class="block w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-700">بداية</a>
+                <!-- Card 2 -->
+                <div data-aos="zoom-in" data-aos-delay="100" class="glass-card p-10 rounded-3xl text-center group opacity-50 hover:opacity-100 transition duration-500">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center mb-8 border border-white/5">
+                        <i class="fa-solid fa-city text-3xl text-gray-400"></i>
                     </div>
-
-                    <!-- PRO (Highlighted) -->
-                    <div class="bg-darker p-8 rounded-3xl border-2 border-primary shadow-[0_0_40px_rgba(59,130,246,0.15)] text-center relative transform md:scale-110 z-10">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold">الأكثر مبيعاً</div>
-                        <h3 class="text-2xl font-bold text-white mb-2 font-display">المحترف (Pro)</h3>
-                        <div class="text-4xl font-bold text-primary font-display mb-2">250 EGP</div>
-                        <span class="text-gray-500 text-xs">/ شهرياً</span>
-                        
-                        <ul class="space-y-4 text-sm text-gray-300 mb-8 mt-8 text-right pr-4 font-bold">
-                            <li><i class="fa-solid fa-check text-primary ml-2"></i> تحليلات لا نهائية</li>
-                            <li><i class="fa-solid fa-check text-primary ml-2"></i> أسعار لحظية (Real-time)</li>
-                            <li><i class="fa-solid fa-check text-primary ml-2"></i> خريطة السيولة (Sectors)</li>
-                            <li><i class="fa-solid fa-check text-primary ml-2"></i> حاسبة إدارة المخاطر</li>
-                            <li><i class="fa-solid fa-check text-primary ml-2"></i> الوصول للأكاديمية كاملة</li>
-                        </ul>
-                        <a href="https://t.me/BOURSAAI" target="_blank" class="block w-full py-4 rounded-xl bg-primary hover:bg-blue-600 text-white font-bold shadow-lg transition">اشترك الآن</a>
+                    <h3 class="text-2xl font-bold text-white mb-2 font-display">العقارات</h3>
+                    <div class="h-1 w-24 mx-auto bg-gray-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-blue-500 w-[40%]"></div>
                     </div>
-
-                    <!-- VIP -->
-                    <div class="bg-surface p-8 rounded-3xl border border-gold/30 text-center relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition duration-500"></div>
-                        <h3 class="text-xl font-bold text-gold mb-2">الحيتان (VIP)</h3>
-                        <div class="text-3xl font-bold text-white font-display mb-6">???</div>
-                        <ul class="space-y-4 text-sm text-gray-400 mb-8 text-right pr-4">
-                            <li><i class="fa-solid fa-check text-gold ml-2"></i> كل مميزات Pro</li>
-                            <li><i class="fa-solid fa-check text-gold ml-2"></i> تواصل مباشر مع المحللين</li>
-                            <li><i class="fa-solid fa-check text-gold ml-2"></i> تقارير خاصة (Private)</li>
-                            <li><i class="fa-solid fa-check text-gold ml-2"></i> إدارة محافظ (قريباً)</li>
-                        </ul>
-                        <a href="#" class="block w-full py-3 rounded-xl border border-gold text-gold font-bold hover:bg-gold hover:text-black transition">تواصل معنا</a>
-                    </div>
+                    <p class="text-[10px] font-eng text-gray-500 mt-2 uppercase tracking-widest">Accumulation</p>
                 </div>
-            </section>
+
+                <!-- Card 3 -->
+                <div data-aos="zoom-in" data-aos-delay="200" class="glass-card p-10 rounded-3xl text-center group opacity-50 hover:opacity-100 transition duration-500">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center mb-8 border border-white/5">
+                        <i class="fa-solid fa-industry text-3xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2 font-display">الصناعة</h3>
+                    <div class="h-1 w-24 mx-auto bg-gray-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-red-500 w-[15%]"></div>
+                    </div>
+                    <p class="text-[10px] font-eng text-gray-500 mt-2 uppercase tracking-widest">Outflow</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-    </main>
+    <!-- The Black Box (Tools Teaser) -->
+    <section class="py-32">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Text -->
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-8">
+                        أدواتك السرية <br>
+                        <span class="text-accent">للنجاة في السوق</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        نحن لا نعطيك سمكة، ولا نعلمك الصيد فقط.. نحن نعطيك "شبكة صيد" متطورة. أدواتنا مدمجة داخل البوت لتعمل كمدير مخاطر شخصي لك 24 ساعة.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-surface p-4 rounded-xl border border-white/5 flex justify-between items-center group hover:border-accent/30 transition cursor-default">
+                            <span class="font-bold text-white group-hover:text-accent transition">حاسبة حجم الصفقة (Risk Calc)</span>
+                            <i class="fa-solid fa-lock text-gray-600"></i>
+                        </div>
+                        <div class="bg-surface p-4 rounded-xl border border-white/5 flex justify-between items-center group hover:border-accent/30 transition cursor-default">
+                            <span class="font-bold text-white group-hover:text-accent transition">مكتشف الأهداف (Sniper Mode)</span>
+                            <i class="fa-solid fa-lock text-gray-600"></i>
+                        </div>
+                        <div class="bg-surface p-4 rounded-xl border border-white/5 flex justify-between items-center group hover:border-accent/30 transition cursor-default">
+                            <span class="font-bold text-white group-hover:text-accent transition">الأكاديمية المتقدمة (30 Lessons)</span>
+                            <i class="fa-solid fa-lock text-gray-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abstract Art -->
+                <div data-aos="fade-left" class="relative flex justify-center items-center h-[400px]">
+                    <div class="absolute inset-0 bg-accent/5 rounded-full blur-[80px]"></div>
+                    <div class="relative w-64 h-64 border border-white/10 rounded-full animate-spin-slow">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-accent rounded-full shadow-[0_0_20px_#10b981]"></div>
+                    </div>
+                    <div class="absolute w-48 h-48 border border-white/10 rounded-full animate-spin-slow" style="animation-direction: reverse;">
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_20px_#3b82f6]"></div>
+                    </div>
+                    <div class="absolute glass-panel p-6 rounded-2xl border border-white/10 backdrop-blur-xl">
+                        <i class="fa-solid fa-shield-halved text-4xl text-white mb-2"></i>
+                        <div class="font-bold text-white">PROTECTED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Exclusivity -->
+    <section class="py-32 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5"></div>
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-6">هل أنت جاهز <span class="text-gold">للانضمام للنخبة؟</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
+                البوت ليس للجميع. إنه للمستثمر الجاد الذي يدرك قيمة المعلومة. المقاعد في باقة الـ VIP محدودة لضمان جودة الخدمة.
+            </p>
+            
+            <div class="glass-card p-12 rounded-[3rem] border border-gold/30 relative overflow-hidden group max-w-lg mx-auto">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50"></div>
+                
+                <div class="text-gold font-eng tracking-[0.3em] uppercase text-sm mb-4">ACCESS GRANTED</div>
+                <h3 class="text-5xl font-bold text-white mb-2 font-display">VIP MEMBER</h3>
+                <div class="text-gray-400 mb-8 font-sans">اشتراك شهري شامل</div>
+                
+                <div class="space-y-4 text-right mb-10 max-w-xs mx-auto">
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <i class="fa-solid fa-check text-gold"></i> <span>وصول كامل لمحرك V28</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <i class="fa-solid fa-check text-gold"></i> <span>إشارات دخول لحظية</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <i class="fa-solid fa-check text-gold"></i> <span>دعم فني مباشر</span>
+                    </div>
+                </div>
+
+                <a href="https://t.me/BOURSAAI" target="_blank" class="block w-full py-5 bg-gold text-black font-black text-xl rounded-2xl hover:bg-white hover:scale-105 transition duration-300 shadow-[0_0_40px_rgba(251,191,36,0.3)]">
+                    UNLOCK NOW
+                </a>
+                
+                <p class="text-[10px] text-gray-500 mt-6 font-sans">
+                    * ضمان استرداد الأموال في حالة عدم الرضا في أول 48 ساعة.
+                </p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-[#050b14] py-16 border-t border-gray-900 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-purple opacity-50"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
-            <div class="col-span-1 md:col-span-2">
-                <h2 class="text-2xl font-display font-black text-white mb-4">BOURSA <span class="text-primary">AI</span></h2>
-                <p class="text-gray-500 leading-relaxed max-w-sm mb-6">
-                    المنصة الأولى عربياً التي تدمج قوة الذكاء الاصطناعي مع علوم التحليل الفني لخدمة المستثمر الفرد. هدفنا هو تحريرك من سيطرة "الجروبات" ومنحك القدرة على اتخاذ القرار بناءً على بيانات حقيقية.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition"><i class="fa-brands fa-telegram"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-400 transition"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-500 transition"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-3 mb-8 opacity-50 hover:opacity-100 transition duration-500">
+                <i class="fa-solid fa-brain text-3xl text-white"></i>
+                <span class="text-2xl font-eng font-bold tracking-wider text-white">BOURSA AI</span>
+            </div>
+            
+            <p class="text-gray-600 max-w-md mx-auto mb-12 text-sm">
+                نحن نبني مستقبل التداول في مصر. تكنولوجيا متطورة، رؤية ثاقبة، ونتائج تتحدث عن نفسها.
+            </p>
+
+            <div class="flex justify-center gap-8 mb-12 text-2xl text-gray-500">
+                <a href="#" class="hover:text-primary transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-pink-500 transition"><i class="fa-brands fa-instagram"></i></a>
             </div>
 
-            <div>
-                <h4 class="text-white font-bold mb-6">روابط سريعة</h4>
-                <ul class="space-y-3 text-gray-500">
-                    <li><a href="#" onclick="showPage('home')" class="hover:text-primary transition">الرئيسية</a></li>
-                    <li><a href="#" onclick="showPage('pricing')" class="hover:text-primary transition">الأسعار</a></li>
-                    <li><a href="#" onclick="showPage('academy')" class="hover:text-primary transition">الأكاديمية</a></li>
-                    <li><a href="#" class="hover:text-primary transition">الشروط والأحكام</a></li>
-                    <li><a href="#" class="hover:text-primary transition">سياسة الخصوصية</a></li>
-                </ul>
+            <div class="text-[10px] text-gray-800 font-eng uppercase tracking-widest">
+                &copy; 2025 BOURSA AI. DEVELOPED BY ALI (QATARY).<br>
+                ALL RIGHTS RESERVED. CAIRO, EGYPT.
             </div>
-
-            <div>
-                <h4 class="text-white font-bold mb-6">تواصل معنا</h4>
-                <ul class="space-y-3 text-gray-500">
-                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-primary"></i> support@boursa-ai.com</li>
-                    <li class="flex items-center gap-2"><i class="fa-brands fa-telegram text-primary"></i> @QatarySupport</li>
-                    <li class="text-xs mt-4 text-gray-600">
-                        تنبيه: التداول في البورصة ينطوي على مخاطر. المعلومات المقدمة هي لأغراض تعليمية وتحليلية وليست دعوة للبيع أو الشراء.
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-gray-900 text-center text-xs text-gray-600 font-mono flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2025 Boursa AI. Developed by Ali (Qatary).</p>
-            <p>System Status: <span class="text-green-500">Operational</span> | V28.0.2-Stable</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // --- DATA & LOGIC ---
-
-        // 1. Academy Data (Replicating Python Dictionary Logic)
-        const lessons = [
-            { icon: "fa-chart-column", title: "تحليل الحجم (VSA)", cat: "تحليل فني", desc: "كيف تقرأ نوايا الحيتان من خلال الفوليوم؟ السيولة هي وقود الحركة." },
-            { icon: "fa-wave-square", title: "مؤشر RSI", cat: "تحليل فني", desc: "كشف مناطق التشبع الشرائي والبيعي. متى تشتري السهم وهو 'رخيص'؟" },
-            { icon: "fa-arrows-to-dot", title: "الدعم والمقاومة", cat: "تحليل فني", desc: "تحديد الأرضية والسقف للسعر. كيف تتوقع الارتداد قبل حدوثه؟" },
-            { icon: "fa-shield-halved", title: "وقف الخسارة", cat: "إدارة مخاطر", desc: "الرقم الأهم في صفقتك. كيف تحمي رأس مالك من الانهيار؟" },
-            { icon: "fa-chart-line", title: "مؤشر MACD", cat: "تحليل فني", desc: "شيخ المؤشرات لتحديد الاتجاه والزخم. متى تدخل مع التقاطع الإيجابي؟" },
-            { icon: "fa-dna", title: "البولنجر باند", cat: "تحليل فني", desc: "اصطياد الانفجار السعري (Squeeze). الهدوء الذي يسبق العاصفة." },
-            { icon: "fa-scale-balanced", title: "إدارة المخاطر", cat: "إدارة مخاطر", desc: "القاعدة الذهبية: لا تخسر أكثر من 2% من محفظتك في صفقة واحدة." },
-            { icon: "fa-candle-holder", title: "الشموع اليابانية", cat: "تحليل فني", desc: "لغة السعر. شرح نماذج الهمر، الابتلاعية، والدوجي." },
-            { icon: "fa-shuffle", title: "الانفراج (Divergence)", cat: "تحليل فني", desc: "عندما يكذب السعر ويصدق المؤشر. أقوى إشارات الانعكاس." },
-            { icon: "fa-calculator", title: "أرقام فيبوناتشي", cat: "تحليل فني", desc: "النسب الذهبية التي يحترمها السوق. أين ينتهي التصحيح؟" },
-            { icon: "fa-user-tie", title: "صانع السوق (MM)", cat: "سيكولوجية", desc: "كيف يفكر 'الهامور'؟ افهم ألاعيب التجميع والتصريف." },
-            { icon: "fa-flag-checkered", title: "الأعلام والرايات", cat: "تحليل فني", desc: "نماذج استمرارية تؤكد أن الاتجاه مكمل في طريقه." },
-            { icon: "fa-mug-hot", title: "الكوب والعروة", cat: "تحليل فني", desc: "النموذج الكلاسيكي للتجميع الطويل. متى يتم الاختراق؟" },
-            { icon: "fa-triangle-exclamation", title: "المثلثات", cat: "تحليل فني", desc: "أشكال الحيرة التي تنتهي بانفجار قوي لأعلى أو لأسفل." },
-            { icon: "fa-cat", title: "وثبة القط الميت", cat: "سيكولوجية", desc: "فخ الارتداد الوهمي في الاتجاه الهابط. احذر منه!" },
-            { icon: "fa-gem", title: "نموذج الماسة", cat: "تحليل فني", desc: "نموذج انعكاسي نادر يظهر في القمم وينذر بهبوط عنيف." },
-            { icon: "fa-layer-group", title: "الفجوات السعرية", cat: "تحليل فني", desc: "أنواع الـ Gaps: فجوة الاختراق، فجوة الهروب، وفجوة الإرهاق." },
-            { icon: "fa-brain", title: "سيكولوجية المتداول", cat: "سيكولوجية", desc: "كيف تسيطر على الخوف والطمع؟ النفسية هي 90% من النجاح." },
-        ];
-
-        // 2. Render Lessons
-        function renderLessons() {
-            const grid = document.getElementById('lessons-grid');
-            grid.innerHTML = lessons.map((l, i) => `
-                <div class="glass-hover glass p-6 rounded-2xl cursor-pointer transition duration-300 group border-t-2 border-transparent hover:border-purple" data-aos="fade-up" data-aos-delay="${i * 50}">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 bg-surface rounded-full flex items-center justify-center text-gray-400 group-hover:text-purple group-hover:bg-purple/10 transition">
-                            <i class="fa-solid ${l.icon} text-xl"></i>
-                        </div>
-                        <span class="text-[10px] bg-darker px-2 py-1 rounded border border-gray-700 text-gray-400">${l.cat}</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 font-display group-hover:text-purple transition">${l.title}</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        ${l.desc}
-                    </p>
-                </div>
-            `).join('');
-        }
-
-        // 3. Navigation Logic (SPA Routing)
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-section').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('animate-fade-in');
-            });
-            
-            // Remove active class from nav
-            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-
-            // Show selected page
-            const target = document.getElementById(`page-${pageId}`);
-            if(target) {
-                target.classList.remove('hidden');
-                target.classList.add('animate-fade-in'); // Add animation class if defined
-                window.scrollTo(0, 0);
-            }
-
-            // Init Charts if sectors page
-            if(pageId === 'sectors') {
-                setTimeout(initChart, 100);
-            }
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // 4. Calculator Logic
-        function calculateRisk() {
-            const capital = parseFloat(document.getElementById('calc-capital').value) || 0;
-            const riskPct = parseFloat(document.getElementById('calc-risk').value) || 0;
-            const entry = parseFloat(document.getElementById('calc-entry').value) || 0;
-            const stop = parseFloat(document.getElementById('calc-stop').value) || 0;
-
-            if (capital > 0 && entry > 0 && stop > 0 && entry > stop) {
-                const riskAmount = capital * (riskPct / 100);
-                const riskPerShare = entry - stop;
-                const shares = Math.floor(riskAmount / riskPerShare);
-                const positionSize = shares * entry;
-                const lossPercent = ((entry - stop) / entry) * 100;
-
-                // UI Updates
-                animateValue("res-shares", 0, shares, 1000);
-                document.getElementById('res-position').innerText = positionSize.toLocaleString() + " EGP";
-                document.getElementById('res-loss').innerText = riskAmount.toLocaleString() + " EGP";
-                document.getElementById('res-percent').innerText = lossPercent.toFixed(2) + "%";
-
-                // Warning Logic
-                const alertBox = document.getElementById('risk-alert');
-                if (positionSize > capital) {
-                    alertBox.classList.remove('hidden');
-                    alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> تنبيه: حجم الصفقة أكبر من رأس المال! قلل عدد الأسهم.';
-                } else if (lossPercent > 10) {
-                    alertBox.classList.remove('hidden');
-                    alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> تنبيه: الوقف بعيد جداً (>10%). الصفقة خطرة.';
-                } else {
-                    alertBox.classList.add('hidden');
-                }
-            }
-        }
-
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // 5. Chart.js Logic (Sector Rotation)
-        let myChart = null;
-        function initChart() {
-            const ctx = document.getElementById('sectorsChart').getContext('2d');
-            
-            // Destroy existing if re-rendering
-            if(myChart) myChart.destroy();
-
-            // Gradient for Banks
-            const gradientBanks = ctx.createLinearGradient(0, 0, 0, 400);
-            gradientBanks.addColorStop(0, 'rgba(34, 197, 94, 0.8)'); // Green
-            gradientBanks.addColorStop(1, 'rgba(34, 197, 94, 0.1)');
-
-            // Gradient for Real Estate
-            const gradientRE = ctx.createLinearGradient(0, 0, 0, 400);
-            gradientRE.addColorStop(0, 'rgba(59, 130, 246, 0.8)'); // Blue
-            gradientRE.addColorStop(1, 'rgba(59, 130, 246, 0.1)');
-
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['البنوك', 'العقارات', 'الموارد', 'أغذية', 'اتصالات', 'صناعة', 'مالي', 'رعاية'],
-                    datasets: [{
-                        label: 'صافي تدفق السيولة (مليون ج.م)',
-                        data: [1200, 450, 120, 80, -50, -200, 300, 40],
-                        backgroundColor: [
-                            gradientBanks, 
-                            gradientRE,
-                            'rgba(16, 185, 129, 0.5)',
-                            'rgba(245, 158, 11, 0.5)',
-                            'rgba(107, 114, 128, 0.5)',
-                            'rgba(239, 68, 68, 0.5)', // Red for negative
-                            'rgba(139, 92, 246, 0.5)',
-                            'rgba(236, 72, 153, 0.5)'
-                        ],
-                        borderColor: [
-                            '#22c55e', '#3b82f6', '#10b981', '#f59e0b', '#6b7280', '#ef4444', '#8b5cf6', '#ec4899'
-                        ],
-                        borderWidth: 1,
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                            titleFont: { family: 'Cairo' },
-                            bodyFont: { family: 'Tajawal' },
-                            callbacks: {
-                                label: function(context) {
-                                    return context.raw > 0 ? `+${context.raw}M تجميع` : `${context.raw}M تصريف`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                            ticks: { color: '#94a3b8' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#e2e8f0', font: { family: 'Cairo' } }
-                        }
-                    }
-                }
-            });
-        }
-
-        // 6. Initialization
-        window.onload = function() {
-            // Remove Loader
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => document.getElementById('loader').remove(), 500);
-                
-                // Init Animations
-                AOS.init({ duration: 800, offset: 50, once: true });
-                renderLessons();
-                
-                // Terminal Typewriter Effect Simulation
-                const terminal = document.getElementById('terminal-content');
-                if(terminal) {
-                    setInterval(() => {
-                        const logs = [
-                            '<div class="text-blue-400">> Fetching new price packets... [40ms]</div>',
-                            '<div class="text-gray-500">> Analyzing HDBK Volume... Normal</div>',
-                            '<div class="text-gold">> DETECTED: Smart Money entering EGAL</div>'
-                        ];
-                        const randomLog = logs[Math.floor(Math.random() * logs.length)];
-                        terminal.insertAdjacentHTML('beforeend', randomLog);
-                        terminal.scrollTop = terminal.scrollHeight;
-                    }, 4000);
-                }
-            }, 1500);
-        };
-
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
     </script>
 </body>
 </html>
