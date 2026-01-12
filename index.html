@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بورصة AI | رفيقك الذكي للربح من البورصة المصرية</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',       // Slate 900
+                        darker: '#020617',     // Slate 950
+                        primary: '#3b82f6',    // Blue
+                        accent: '#10b981',     // Emerald (Profit Color)
+                        danger: '#ef4444',     // Red (Loss/Stop Color)
+                        gold: '#f59e0b',       // Amber (VIP)
+                        card: '#1e293b',       // Slate 800
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        display: ['Cairo', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+                        'chart-pattern': "url('https://www.transparenttextures.com/patterns/graphy.png')",
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(16, 185, 129, 0.15)', // Green profit glow
+                        'glow-gold': '0 0 25px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+        .profit-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-text {
+            background: linear-gradient(to right, #fcd34d, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Mobile Message Bubble Style */
+        .msg-bubble {
+            background: #1e293b;
+            border-radius: 0 16px 16px 16px;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .msg-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 10px 10px;
+            border-color: transparent transparent transparent #1e293b;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xl shadow-glow">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-black text-2xl tracking-tight text-white">BOURSA <span class="text-primary">AI</span></span>
+                        <span class="text-[10px] text-gray-400 font-bold tracking-widest uppercase">رفيق المستثمر الذكي</span>
+                    </div>
+                </div>
+                
+                <!-- Investor Links -->
+                <div class="hidden md:flex items-center gap-8 font-bold text-sm text-gray-300">
+                    <a href="#features" class="hover:text-primary transition">لماذا نحن؟</a>
+                    <a href="#signals" class="hover:text-accent transition">التوصيات</a>
+                    <a href="#sectors" class="hover:text-gold transition">خريطة السيولة</a>
+                    <a href="#strategies" class="hover:text-white transition">الاستراتيجيات</a>
+                    <a href="#education" class="hover:text-purple-400 transition">تعلم الاستثمار</a>
+                </div>
+
+                <!-- CTA -->
+                <a href="https://t.me/BOURSAAI" target="_blank" class="bg-primary hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold shadow-glow transition transform hover:scale-105 flex items-center gap-2 font-display">
+                    <i class="fa-brands fa-telegram text-lg"></i> جرب التحليل مجاناً
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center bg-darker">
+        <div class="absolute inset-0 bg-hero-pattern opacity-5 animate-pulse"></div>
+        <!-- Gradient Orbs -->
+        <div class="absolute top-20 right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Copy -->
+                <div data-aos="fade-left">
+                    <div class="inline-block px-4 py-1 mb-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-bold text-sm">
+                        🚀 الإصدار V28: اكتشف أين يذهب "الكاش" الآن
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-display font-black leading-tight mb-6 text-white">
+                        استثمر بذكاء<br>
+                        مش بمشاعرك 🧠
+                    </h1>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8 font-sans max-w-lg">
+                        أول مساعد شخصي للمستثمر في البورصة المصرية. حلل أي سهم في ثانية، اعرف اتجاه "الحيتان"، وحدد نقاط الدخول والخروج بدقة رياضية بعيداً عن التوصيات العشوائية.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://t.me/BOURSAAI" target="_blank" class="bg-white text-darker px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl flex items-center gap-2 font-display">
+                            <i class="fa-solid fa-rocket text-primary"></i> ابدأ تحليل محفظتك
+                        </a>
+                        <div class="flex items-center gap-3 px-4 text-gray-400 text-sm font-bold">
+                            <div class="flex -space-x-2 space-x-reverse">
+                                <div class="w-8 h-8 rounded-full bg-gray-700 border-2 border-darker"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-600 border-2 border-darker"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-darker"></div>
+                            </div>
+                            <span>يستخدمه +1,200 مستثمر ذكي</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual: Phone Mockup (User Experience) -->
+                <div class="relative flex justify-center" data-aos="fade-right">
+                    <div class="relative w-[320px] h-[640px] bg-dark rounded-[3rem] border-8 border-gray-800 shadow-2xl overflow-hidden z-20">
+                        <!-- Header -->
+                        <div class="bg-card h-16 flex items-center px-5 justify-between shadow-md relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white text-xs"><i class="fa-solid fa-robot"></i></div>
+                                <div>
+                                    <h3 class="text-white text-sm font-bold">BOURSA AI</h3>
+                                    <p class="text-accent text-[10px]">متصل الآن • V28</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical text-gray-500"></i>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div class="p-4 h-full bg-[#0b1120] relative overflow-hidden flex flex-col justify-end pb-20">
+                            <!-- Background Chart Line -->
+                            <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/graphy.png');"></div>
+
+                            <!-- User Msg -->
+                            <div class="flex justify-end mb-4">
+                                <div class="bg-primary text-white py-2 px-4 rounded-2xl rounded-tr-none text-xs font-bold shadow-lg">
+                                    تحليل سهم فوري FWRY
+                                </div>
+                            </div>
+
+                            <!-- Bot Reply -->
+                            <div class="flex justify-start w-full">
+                                <div class="msg-bubble bg-card p-3 w-[90%] border border-gray-700/50">
+                                    <!-- Header -->
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <span class="text-white font-bold text-sm block">FWRY (فوري)</span>
+                                            <span class="text-xs text-gray-400">قطاع التكنولوجيا</span>
+                                        </div>
+                                        <span class="bg-accent/20 text-accent text-[10px] px-2 py-1 rounded font-bold">+2.4% 🟢</span>
+                                    </div>
+
+                                    <!-- Signal Card -->
+                                    <div class="bg-black/30 rounded-lg p-2 mb-2 border-r-2 border-accent">
+                                        <div class="text-[10px] text-gray-400 mb-1">الزتونة الفنية:</div>
+                                        <p class="text-xs text-gray-200 leading-relaxed font-medium">
+                                            السهم في اتجاه صاعد 📈. يوجد سيولة تجميعية (2.5x) واختراق لمقاومة 6.20 ج.م.
+                                        </p>
+                                    </div>
+
+                                    <!-- Action Buttons (Visual) -->
+                                    <div class="grid grid-cols-2 gap-2 mt-2">
+                                        <div class="bg-accent/10 border border-accent/20 rounded p-1 text-center">
+                                            <span class="block text-[9px] text-gray-400">هدف أول</span>
+                                            <span class="block text-accent font-bold text-xs">6.80 ج.م</span>
+                                        </div>
+                                        <div class="bg-danger/10 border border-danger/20 rounded p-1 text-center">
+                                            <span class="block text-[9px] text-gray-400">وقف خسارة</span>
+                                            <span class="block text-danger font-bold text-xs">5.90 ج.م</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute top-1/3 -right-10 glass-card p-4 rounded-xl animate-bounce hidden md:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xl"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">إشارة دخول مؤكدة</h4>
+                                <p class="text-xs text-gray-400">بناءً على السيولة + الاختراق</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why Us? (Value Proposition) -->
+    <section id="features" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
+            <h2 class="text-3xl font-display font-black text-white mb-4">ليه تثق في <span class="profit-text">Boursa AI</span>؟</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">لأننا لغينا العاطفة من المعادلة. النظام بيعتمد على الأرقام والبيانات فقط عشان يحميك من "القطيع" وتوصيات الجروبات العشوائية.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="glass-card p-8 rounded-2xl text-center">
+                <div class="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary text-3xl mb-6"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="text-xl font-bold text-white mb-3 font-display">سرعة اتخاذ القرار</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    بدل ما تقضي ساعات تحلل الشارتات، البوت بيحلل 400 سهم في ثانية واحدة ويديك الخلاصة (الزتونة) عشان تلحق الفرصة في بدايتها.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="glass-card p-8 rounded-2xl text-center border-accent/30">
+                <div class="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center text-accent text-3xl mb-6"><i class="fa-solid fa-crosshairs"></i></div>
+                <h3 class="text-xl font-bold text-white mb-3 font-display">قنص الفرص (Sniper Mode)</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    خوارزمية خاصة بتدور على الأسهم اللي فيها "تجميع حيتان" هادي قبل الانفجار السعري. ادخل مع الكبار واخرج معاهم.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-card p-8 rounded-2xl text-center">
+                <div class="w-16 h-16 mx-auto bg-danger/10 rounded-full flex items-center justify-center text-danger text-3xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3 class="text-xl font-bold text-white mb-3 font-display">إدارة المخاطر الصارمة</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    أهم من المكسب هو الحفاظ على رأس المال. البوت بيحددلك "وقف الخسارة" بدقة وبيقولك تشتري كام سهم بالظبط عشان متخاطرش بزيادة.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sector Rotation (The Unique Selling Point) -->
+    <section id="sectors" class="py-24 bg-darker relative overflow-hidden">
+        <div class="absolute inset-0 bg-chart-pattern opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <span class="text-gold font-bold tracking-wider text-sm mb-2 block uppercase">جديد وحصري V28</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-6">اتبع حركة الأموال الذكية 💰<br><span class="gold-text">Sector Rotation</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        السوق مش بيطلع كله مرة واحدة. السيولة بتلف بين القطاعات (يوم بنوك، يوم عقارات، يوم كيماويات).
+                        <br><br>
+                        <strong>إحنا بنقولك السيولة رايحة فين النهاردة!</strong> عشان متبقاش ماسك سهم ميت والناس بتكسب في قطاع تاني.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4">
+                            <i class="fa-solid fa-check-circle text-gold text-xl"></i>
+                            <span class="text-gray-300">ترتيب القطاعات حسب "قوة السيولة"</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fa-solid fa-check-circle text-gold text-xl"></i>
+                            <span class="text-gray-300">كشف عمليات التجميع في القطاعات الهادئة</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fa-solid fa-check-circle text-gold text-xl"></i>
+                            <span class="text-gray-300">تحديث لحظي أثناء الجلسة</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Visual Representation of Sectors -->
+                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                    <div class="bg-card p-6 rounded-2xl border border-gold/50 shadow-glow-gold relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-gold text-black text-xs font-bold px-2 py-1 rounded-bl">الأقوى اليوم 🔥</div>
+                        <i class="fa-solid fa-building-columns text-4xl text-gold mb-4"></i>
+                        <h4 class="text-white font-bold text-lg">البنوك</h4>
+                        <div class="w-full bg-gray-700 h-2 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-gold h-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2 text-left">85% سيولة شرائية</p>
+                    </div>
+
+                    <div class="bg-card p-6 rounded-2xl border border-gray-700 relative opacity-70">
+                        <i class="fa-solid fa-city text-4xl text-gray-500 mb-4"></i>
+                        <h4 class="text-white font-bold text-lg">العقارات</h4>
+                        <div class="w-full bg-gray-700 h-2 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-blue-500 h-full" style="width: 45%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2 text-left">45% تجميع هادي</p>
+                    </div>
+
+                    <div class="bg-card p-6 rounded-2xl border border-gray-700 relative opacity-50">
+                        <i class="fa-solid fa-industry text-4xl text-gray-600 mb-4"></i>
+                        <h4 class="text-white font-bold text-lg">الصناعة</h4>
+                        <div class="w-full bg-gray-700 h-2 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-red-500 h-full" style="width: 20%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2 text-left">20% خروج سيولة</p>
+                    </div>
+
+                    <div class="bg-card p-6 rounded-2xl border border-gray-700 relative opacity-50">
+                        <i class="fa-solid fa-tower-cell text-4xl text-gray-600 mb-4"></i>
+                        <h4 class="text-white font-bold text-lg">الاتصالات</h4>
+                        <div class="w-full bg-gray-700 h-2 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-gray-500 h-full" style="width: 15%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2 text-left">15% ركود</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategies Section -->
+    <section id="strategies" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
+            <h2 class="text-3xl font-display font-black text-white">خطط تناسب <span class="text-primary">أسلوبك</span></h2>
+            <p class="text-gray-400 mt-4">سواء كنت مضارب سريع أو مستثمر طويل النفس، البوت بيطلعلك الخطة المناسبة ليك.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Scalping -->
+            <div class="bg-card rounded-3xl p-8 border border-gray-700 hover:border-accent transition group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-accent/10 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-accent/20"></div>
+                <h3 class="text-2xl font-bold text-white mb-2">⚡ المضاربة اللحظية</h3>
+                <p class="text-gray-400 text-sm mb-6">ادخل واخرج في نفس الجلسة (Scalping).</p>
+                <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> أهداف سريعة (1% - 3%)</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> وقف خسارة ضيق جداً</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> استغلال السيولة الانفجارية</li>
+                </ul>
+            </div>
+
+            <!-- Swing -->
+            <div class="bg-card rounded-3xl p-8 border-2 border-primary shadow-glow relative transform md:-translate-y-4">
+                <div class="absolute top-0 center bg-primary text-white text-xs font-bold px-4 py-1 rounded-b-lg left-1/2 -translate-x-1/2">الأكثر شعبية</div>
+                <h3 class="text-2xl font-bold text-white mb-2">📅 المدى المتوسط</h3>
+                <p class="text-gray-400 text-sm mb-6">اشتري وريح بالك أسبوع أو اتنين (Swing).</p>
+                <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-primary"></i> أهداف كبيرة (10% - 20%)</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-primary"></i> وقف خسارة مرن</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-primary"></i> ركوب الموجة (Trend Following)</li>
+                </ul>
+            </div>
+
+            <!-- Investing -->
+            <div class="bg-card rounded-3xl p-8 border border-gray-700 hover:border-accent transition group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-green-500/10 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-green-500/20"></div>
+                <h3 class="text-2xl font-bold text-white mb-2">🏗️ الاستثمار الطويل</h3>
+                <p class="text-gray-400 text-sm mb-6">بناء مراكز سعرية للمستقبل (Investing).</p>
+                <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> أهداف استراتيجية (+50%)</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> الاعتماد على القيمة والاتجاه العام</li>
+                    <li class="flex gap-2"><i class="fa-solid fa-check text-accent"></i> راحة بال تامة</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education (Value Add) -->
+    <section id="education" class="py-20 bg-darker border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-display font-black text-white mb-6">مش مجرد توصيات..<br>إحنا بنعلمك الصيد 🎣</h2>
+                <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                    البوت جواه **أكاديمية كاملة** بتشرحلك كل المصطلحات المعقدة بلهجة مصرية بسيطة.
+                    عايز تفهم يعني إيه RSI؟ يعني إيه "مصيدة ثيران"؟ دوسة واحدة وهتفهم كل حاجة.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-purple-900/30 text-purple-300 px-3 py-1 rounded-lg text-sm border border-purple-500/30">تحليل فني</span>
+                    <span class="bg-purple-900/30 text-purple-300 px-3 py-1 rounded-lg text-sm border border-purple-500/30">سيكولوجية التداول</span>
+                    <span class="bg-purple-900/30 text-purple-300 px-3 py-1 rounded-lg text-sm border border-purple-500/30">إدارة رأس المال</span>
+                </div>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <div class="bg-card p-4 rounded-xl border border-gray-700 text-center">
+                    <i class="fa-solid fa-book-open text-2xl text-purple-400 mb-2"></i>
+                    <h4 class="text-white font-bold text-sm">شرح المصطلحات</h4>
+                </div>
+                <div class="bg-card p-4 rounded-xl border border-gray-700 text-center">
+                    <i class="fa-solid fa-shapes text-2xl text-purple-400 mb-2"></i>
+                    <h4 class="text-white font-bold text-sm">النماذج الفنية</h4>
+                </div>
+                <div class="bg-card p-4 rounded-xl border border-gray-700 text-center">
+                    <i class="fa-solid fa-users-viewfinder text-2xl text-purple-400 mb-2"></i>
+                    <h4 class="text-white font-bold text-sm">كشف صانع السوق</h4>
+                </div>
+                <div class="bg-card p-4 rounded-xl border border-gray-700 text-center">
+                    <i class="fa-solid fa-chart-pie text-2xl text-purple-400 mb-2"></i>
+                    <h4 class="text-white font-bold text-sm">تقسيم المحفظة</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050b14] py-12 border-t border-white/5 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-display font-black text-white mb-2">BOURSA <span class="text-primary">AI</span></h2>
+            <p class="text-gray-500 mb-8 max-w-md mx-auto">قرارك الاستثماري، مدعوم بالذكاء الاصطناعي.</p>
+            
+            <a href="https://t.me/BOURSAAI" class="inline-block bg-white text-darker font-bold px-8 py-3 rounded-full hover:bg-gray-200 transition mb-8 font-display">
+                اشترك الآن في البوت
+            </a>
+
+            <div class="flex justify-center gap-6 mb-8 text-2xl">
+                <a href="#" class="text-gray-500 hover:text-primary transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+
+            <div class="text-xs text-gray-700 border-t border-gray-900 pt-8 font-sans">
+                <p>تنبيه: البورصة تنطوي على مخاطر. البوت هو أداة مساعدة للقرار وليس مدير للاستثمار.</p>
+                <p class="mt-2">&copy; 2025 Boursa AI. Developed by Ali (Qatary).</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 800, offset: 50 });
+        
+        // Navbar Glass Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('bg-dark/90', 'shadow-lg');
+                nav.classList.remove('border-b-0');
+            } else {
+                nav.classList.remove('bg-dark/90', 'shadow-lg');
+                nav.classList.add('border-b-0');
+            }
+        });
+    </script>
+</body>
+</html>
